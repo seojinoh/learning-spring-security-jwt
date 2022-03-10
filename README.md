@@ -2,7 +2,7 @@
 
 ## 프로젝트 개요
 
-`Spring Security` 라이브러리 + `JWT` 개인 학습을 위한 프로젝트 (`JWT`: JSON Web Token, 정보를 JSON 객체로 안전하게 전달하기 위한 암호화된 토큰)
+`Spring Security` + `JWT` 개인 학습을 위한 프로젝트 (`JWT`: JSON Web Token, 정보를 JSON 객체로 안전하게 전달하기 위한 암호화된 토큰)
 
 ### 버전 정보
 
