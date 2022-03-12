@@ -6,3 +6,4 @@ spring:
       - common
       - logging-console
       - jwt
+      - jpa
