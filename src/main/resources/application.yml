@@ -5,3 +5,4 @@ spring:
       local:
       - common
       - logging-console
+      - jwt
