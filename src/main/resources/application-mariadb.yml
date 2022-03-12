@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:mariadb://<HOST>:<PORT>/<DATABASE>
+    username: <USERNAME>
+    password: <PASSWORD>
