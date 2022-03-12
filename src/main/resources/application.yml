@@ -8,3 +8,4 @@ spring:
       - jwt
       - jpa
       - mariadb
+      - redis
