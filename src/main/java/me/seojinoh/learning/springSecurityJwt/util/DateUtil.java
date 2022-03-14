@@ -1,4 +1,4 @@
-package me.seojinoh.learning.springSecurityJwt.common;
+package me.seojinoh.learning.springSecurityJwt.util;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
