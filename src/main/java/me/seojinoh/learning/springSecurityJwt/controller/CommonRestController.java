@@ -63,7 +63,7 @@ public class CommonRestController {
 			}
 		} else {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			result = "parameter(email) not found";
+			result = "Parameter(email) not found";
 		}
 
 		return result;
@@ -84,7 +84,7 @@ public class CommonRestController {
 			}
 		} else {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			result = "parameter(email) not found";
+			result = "Parameter(email) not found";
 		}
 
 		return result;
