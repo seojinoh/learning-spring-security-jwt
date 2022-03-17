@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import me.seojinoh.learning.springSecurityJwt.dto.MemberDetails;
 import me.seojinoh.learning.springSecurityJwt.dto.MemberJoinRequest;
+import me.seojinoh.learning.springSecurityJwt.exception.NotFoundException;
 import me.seojinoh.learning.springSecurityJwt.service.MemberService;
 
 @RestController
@@ -57,6 +58,9 @@ public class CommonRestController {
 
 				response.setStatus(HttpServletResponse.SC_OK);
 				result = memberDetails;
+			} catch(NotFoundException e) {
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+				result = String.format("Member(%s) not found", email.get());
 			} catch(Exception e) {
 				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 				result = "Failed to get member details";

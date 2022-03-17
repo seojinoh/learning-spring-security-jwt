@@ -10,6 +10,7 @@ import me.seojinoh.learning.springSecurityJwt.dao.MemberDao;
 import me.seojinoh.learning.springSecurityJwt.dto.MemberDetails;
 import me.seojinoh.learning.springSecurityJwt.dto.MemberJoinRequest;
 import me.seojinoh.learning.springSecurityJwt.entity.Member;
+import me.seojinoh.learning.springSecurityJwt.exception.NotFoundException;
 import me.seojinoh.learning.springSecurityJwt.util.DateUtil;
 
 @Service
@@ -39,8 +40,14 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	@Transactional
-	public MemberDetails readMember(String email) {
-		return memberDao.findByEmail(email).toMemberDetails();
+	public MemberDetails readMember(String email) throws NotFoundException {
+		Member member = memberDao.findByEmail(email);
+
+		if(member == null) {
+			throw new NotFoundException();
+		}
+
+		return member.toMemberDetails();
 	}
 
 	@Override
