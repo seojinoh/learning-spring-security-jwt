@@ -1,6 +1,5 @@
 package me.seojinoh.learning.springSecurityJwt.controller;
 
-import java.io.IOException;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +31,7 @@ public class CommonRestController {
 	@Autowired private MemberService memberService;
 
 	@PostMapping("/member")
-	public Object postMember(HttpServletRequest request, HttpServletResponse response, @RequestBody MemberJoinRequest memberJoinRequest) throws IOException {
+	public Object postMember(HttpServletRequest request, HttpServletResponse response, @RequestBody MemberJoinRequest memberJoinRequest) {
 		Object result = null;
 
 		try {
@@ -49,7 +48,7 @@ public class CommonRestController {
 	}
 
 	@GetMapping("/member")
-	public Object getMember(HttpServletRequest request, HttpServletResponse response, @RequestParam Optional<String> email) throws IOException {
+	public Object getMember(HttpServletRequest request, HttpServletResponse response, @RequestParam Optional<String> email) {
 		Object result = null;
 
 		if(email.isPresent() && StringUtils.hasText(email.get())) {
@@ -74,7 +73,7 @@ public class CommonRestController {
 	}
 
 	@DeleteMapping("/member")
-	public Object deleteMember(HttpServletRequest request, HttpServletResponse response, @RequestParam Optional<String> email) throws IOException {
+	public Object deleteMember(HttpServletRequest request, HttpServletResponse response, @RequestParam Optional<String> email) {
 		Object result = null;
 
 		if(email.isPresent() && StringUtils.hasText(email.get())) {
