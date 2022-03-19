@@ -25,15 +25,15 @@ import me.seojinoh.learning.springSecurityJwt.service.MemberService;
 import me.seojinoh.learning.springSecurityJwt.util.ResponseUtil;
 
 @RestController
-@RequestMapping(value = "/api")
-public class CommonRestController {
+@RequestMapping(value = "/member")
+public class MemberRestController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired private MemberService	memberService;
 	@Autowired private ResponseUtil		responseUtil;
 
-	@PostMapping("/member")
+	@PostMapping("")
 	public CustomResponse postMember(HttpServletRequest request, HttpServletResponse response, @RequestBody MemberJoinRequest memberJoinRequest) {
 		CustomResponse customResponse = new CustomResponse();
 
@@ -48,7 +48,7 @@ public class CommonRestController {
 		return customResponse;
 	}
 
-	@GetMapping("/member")
+	@GetMapping("")
 	public CustomResponse getMember(HttpServletRequest request, HttpServletResponse response, @RequestParam Optional<String> email) {
 		CustomResponse customResponse = new CustomResponse();
 
@@ -69,7 +69,7 @@ public class CommonRestController {
 		return customResponse;
 	}
 
-	@DeleteMapping("/member")
+	@DeleteMapping("")
 	public CustomResponse deleteMember(HttpServletRequest request, HttpServletResponse response, @RequestParam Optional<String> email) {
 		CustomResponse customResponse = new CustomResponse();
 
