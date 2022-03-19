@@ -50,8 +50,6 @@ public class Member {
 	}
 
 	public static class Builder {
-		@SuppressWarnings("unused")
-		private Integer id;
 		private String email;
 		private String password;
 		private String name;
