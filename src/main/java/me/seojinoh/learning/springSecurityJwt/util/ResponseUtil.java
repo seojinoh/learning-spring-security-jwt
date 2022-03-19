@@ -12,6 +12,7 @@ public class ResponseUtil {
 	@SuppressWarnings("deprecation")
 	public void setResponse(HttpServletResponse response, CustomResponse customResponse, int status, String message, Object data) {
 		response.setStatus(status, message);
+
 		customResponse.setStatus(status);
 		customResponse.setMessage(message);
 		customResponse.setData(data);
