@@ -1,2 +1,6 @@
 jwt:
+  grantType: Bearer
   secretKey: <SECRET>
+  accessTokenExpirationTimeInMilliseconds: 3600000
+  refreshTokenExpirationTimeInMilliseconds: 604800000
+  refreshTokenReissueTimeInMilliseconds: 259200000
