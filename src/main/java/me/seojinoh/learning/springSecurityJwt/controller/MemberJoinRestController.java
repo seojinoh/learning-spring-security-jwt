@@ -42,7 +42,7 @@ public class MemberJoinRestController {
 
 			responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_OK, "OK", memberJoinRequest.toMemberJoinResponse());
 		} catch(Exception e) {
-			responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to register member", null);
+			responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to register member: " + e.getMessage(), null);
 		}
 
 		return customResponse;
@@ -60,7 +60,7 @@ public class MemberJoinRestController {
 			} catch(NotFoundException e) {
 				responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_NOT_FOUND, String.format("Member(%s) not found", email.get()), null);
 			} catch(Exception e) {
-				responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to get member details", null);
+				responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to get member details: " + e.getMessage(), null);
 			}
 		} else {
 			responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_BAD_REQUEST, "Parameter(email) not found", null);
@@ -79,7 +79,7 @@ public class MemberJoinRestController {
 
 				responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_OK, "OK", null);
 			} catch(Exception e) {
-				responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to delete member", null);
+				responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to delete member: " + e.getMessage(), null);
 			}
 		} else {
 			responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_BAD_REQUEST, "Parameter(email) not found", null);
