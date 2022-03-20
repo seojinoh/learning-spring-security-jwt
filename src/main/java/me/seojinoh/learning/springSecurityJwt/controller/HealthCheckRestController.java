@@ -15,4 +15,14 @@ public class HealthCheckRestController {
 		return "pong";
 	}
 
+	@GetMapping("/user/test")
+	public String testUser() {
+		return "success";
+	}
+
+	@GetMapping("/admin/test")
+	public String testAdmin() {
+		return "success";
+	}
+
 }
