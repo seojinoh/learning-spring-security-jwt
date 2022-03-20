@@ -26,7 +26,7 @@ import me.seojinoh.learning.springSecurityJwt.util.ResponseUtil;
 
 @RestController
 @RequestMapping(value = "/member")
-public class MemberRestController {
+public class MemberJoinRestController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
