@@ -5,3 +5,6 @@ spring:
 date:
   timezone: Asia/Seoul
   format: yyyy-MM-dd HH:mm:ss
+
+cache:
+  expirationTimeInSeconds: 60
