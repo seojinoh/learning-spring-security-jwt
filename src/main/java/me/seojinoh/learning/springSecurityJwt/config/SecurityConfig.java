@@ -18,6 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import me.seojinoh.learning.springSecurityJwt.entryPoint.JwtEntryPoint;
 import me.seojinoh.learning.springSecurityJwt.filter.JwtAuthenticationFilter;
+import me.seojinoh.learning.springSecurityJwt.handler.JwtDeniedHandler;
 import me.seojinoh.learning.springSecurityJwt.service.MemberService;
 
 @Configuration
@@ -28,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired private JwtEntryPoint			jwtEntryPoint;
+	@Autowired private JwtDeniedHandler			jwtDeniedHandler;
 	@Autowired private JwtAuthenticationFilter	jwtAuthenticationFilter;
 	@Autowired private MemberService			memberService;
 
@@ -51,7 +53,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/**").permitAll();
 
 		httpSecurity.exceptionHandling()
-			.authenticationEntryPoint(jwtEntryPoint);
+			.authenticationEntryPoint(jwtEntryPoint)
+			.accessDeniedHandler(jwtDeniedHandler);
 
 		httpSecurity.logout().disable()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
