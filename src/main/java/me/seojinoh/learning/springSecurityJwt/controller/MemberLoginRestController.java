@@ -31,7 +31,7 @@ public class MemberLoginRestController {
 	@Autowired private JwtTokenUtil		jwtTokenUtil;
 
 	@PostMapping("/login")
-	public void postLogin(HttpServletRequest request, HttpServletResponse response, @RequestBody MemberLoginRequest memberLoginRequest) {
+	public void login(HttpServletRequest request, HttpServletResponse response, @RequestBody MemberLoginRequest memberLoginRequest) {
 		try {
 			TokenDto tokenDto = memberService.loginMember(memberLoginRequest);
 
