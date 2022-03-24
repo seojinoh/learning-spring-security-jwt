@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import me.seojinoh.learning.springSecurityJwt.dto.CustomResponse;
 import me.seojinoh.learning.springSecurityJwt.dto.MemberDetails;
 import me.seojinoh.learning.springSecurityJwt.dto.MemberJoinRequest;
 import me.seojinoh.learning.springSecurityJwt.exception.NotFoundException;
@@ -34,58 +33,46 @@ public class MemberJoinRestController {
 	@Autowired private ResponseUtil		responseUtil;
 
 	@PostMapping("")
-	public CustomResponse postMember(HttpServletRequest request, HttpServletResponse response, @RequestBody MemberJoinRequest memberJoinRequest) {
-		CustomResponse customResponse = new CustomResponse();
-
+	public void postMember(HttpServletRequest request, HttpServletResponse response, @RequestBody MemberJoinRequest memberJoinRequest) {
 		try {
 			memberService.createMember(memberJoinRequest);
 
-			responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_OK, "OK", memberJoinRequest.toMemberJoinResponse());
+			responseUtil.setResponse(response, HttpServletResponse.SC_OK, "OK", memberJoinRequest.toMemberJoinResponse());
 		} catch(Exception e) {
-			responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to register member: " + e.getMessage(), null);
+			responseUtil.setResponse(response, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to register member", null);
 		}
-
-		return customResponse;
 	}
 
 	@GetMapping("")
-	public CustomResponse getMember(HttpServletRequest request, HttpServletResponse response, @RequestParam Optional<String> email) {
-		CustomResponse customResponse = new CustomResponse();
-
+	public void getMember(HttpServletRequest request, HttpServletResponse response, @RequestParam Optional<String> email) {
 		if(email.isPresent() && StringUtils.hasText(email.get())) {
 			try {
 				MemberDetails memberDetails = memberService.readMember(email.get());
 
-				responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_OK, "OK", memberDetails);
+				responseUtil.setResponse(response, HttpServletResponse.SC_OK, "OK", memberDetails);
 			} catch(NotFoundException e) {
-				responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_NOT_FOUND, String.format("Member(%s) not found", email.get()), null);
+				responseUtil.setResponse(response, HttpServletResponse.SC_NOT_FOUND, String.format("Member(%s) not found", email.get()), null);
 			} catch(Exception e) {
-				responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to get member details: " + e.getMessage(), null);
+				responseUtil.setResponse(response, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to get member details", null);
 			}
 		} else {
-			responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_BAD_REQUEST, "Parameter(email) not found", null);
+			responseUtil.setResponse(response, HttpServletResponse.SC_BAD_REQUEST, "Parameter(email) not found", null);
 		}
-
-		return customResponse;
 	}
 
 	@DeleteMapping("")
-	public CustomResponse deleteMember(HttpServletRequest request, HttpServletResponse response, @RequestParam Optional<String> email) {
-		CustomResponse customResponse = new CustomResponse();
-
+	public void deleteMember(HttpServletRequest request, HttpServletResponse response, @RequestParam Optional<String> email) {
 		if(email.isPresent() && StringUtils.hasText(email.get())) {
 			try {
 				memberService.deleteMember(email.get());
 
-				responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_OK, "OK", null);
+				responseUtil.setResponse(response, HttpServletResponse.SC_OK, "OK", null);
 			} catch(Exception e) {
-				responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to delete member: " + e.getMessage(), null);
+				responseUtil.setResponse(response, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to delete member", null);
 			}
 		} else {
-			responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_BAD_REQUEST, "Parameter(email) not found", null);
+			responseUtil.setResponse(response, HttpServletResponse.SC_BAD_REQUEST, "Parameter(email) not found", null);
 		}
-
-		return customResponse;
 	}
 
 }

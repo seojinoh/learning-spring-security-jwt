@@ -31,48 +31,36 @@ public class MemberLoginRestController {
 	@Autowired private JwtTokenUtil		jwtTokenUtil;
 
 	@PostMapping("/login")
-	public CustomResponse postLogin(HttpServletRequest request, HttpServletResponse response, @RequestBody MemberLoginRequest memberLoginRequest) {
-		CustomResponse customResponse = new CustomResponse();
-
+	public void postLogin(HttpServletRequest request, HttpServletResponse response, @RequestBody MemberLoginRequest memberLoginRequest) {
 		try {
 			TokenDto tokenDto = memberService.loginMember(memberLoginRequest);
 
-			responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_OK, "OK", tokenDto);
+			responseUtil.setResponse(response, HttpServletResponse.SC_OK, "OK", tokenDto);
 		} catch(Exception e) {
-			responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Login failure: " + e.getMessage(), null);
+			responseUtil.setResponse(response, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Login failure", null);
 		}
-
-		return customResponse;
 	}
 
 	@PostMapping("/logout")
-	public CustomResponse logout(HttpServletRequest request, HttpServletResponse response, @RequestHeader("Authorization") String accessToken, @RequestHeader("RefreshToken") String refreshToken) {
-		CustomResponse customResponse = new CustomResponse();
-
+	public void logout(HttpServletRequest request, HttpServletResponse response, @RequestHeader("Authorization") String accessToken, @RequestHeader("RefreshToken") String refreshToken) {
 		try {
 			memberService.logoutMember(new TokenDto(accessToken, refreshToken), jwtTokenUtil.getUsername(jwtTokenUtil.getToken(accessToken)));
 
-			responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_OK, "OK", null);
+			responseUtil.setResponse(response, HttpServletResponse.SC_OK, "OK", null);
 		} catch(Exception e) {
-			responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Logout failure: " + e.getMessage(), null);
+			responseUtil.setResponse(response, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Logout failure", null);
 		}
-
-		return customResponse;
 	}
 
 	@PostMapping("/reissue")
-	public CustomResponse reissue(HttpServletRequest request, HttpServletResponse response, @RequestHeader("RefreshToken") String refreshToken) {
-		CustomResponse customResponse = new CustomResponse();
-
+	public void reissue(HttpServletRequest request, HttpServletResponse response, @RequestHeader("RefreshToken") String refreshToken) {
 		try {
 			TokenDto tokenDto = memberService.reissue(refreshToken);
 
-			responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_OK, "OK", tokenDto);
+			responseUtil.setResponse(response, HttpServletResponse.SC_OK, "OK", tokenDto);
 		} catch(Exception e) {
-			responseUtil.setResponse(response, customResponse, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to reissue token: " + e.getMessage(), null);
+			responseUtil.setResponse(response, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to reissue token", null);
 		}
-
-		return customResponse;
 	}
 
 }
