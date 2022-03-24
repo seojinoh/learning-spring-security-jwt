@@ -17,10 +17,9 @@ public class ResponseUtil {
 
 	@Autowired private ObjectMapper objectMapper;
 
-	@SuppressWarnings("deprecation")
 	public void setResponse(HttpServletResponse response, int status, String message, Object data) {
 		response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-		response.setStatus(status, message);
+		response.setStatus(status);
 		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 
 		try {
